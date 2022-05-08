@@ -6,7 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main, jun-1-CI/CD-Grount-Explore]
+    branches: 
+      - main 
+      - jun-1-CI/CD-Grount-Explore]
   pull_request:
     branches: [ main, ]
 
