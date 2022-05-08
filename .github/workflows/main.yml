@@ -8,7 +8,7 @@ on:
   push:
     branches: 
       - main 
-      - jun-1-CI/CD-Grount-Explore]
+      - jun-1-CI/CD-Grount-Explore
   pull_request:
     branches: [ main, ]
 
