@@ -6,6 +6,16 @@ module.exports = function(grunt) {
       build_folder: 'build' 
     },
 
+    copy: {
+      main: {
+        files: [{
+          expand: true,
+          cwd: 'source',
+          src: ['favicon.ico', 'index.html', 'sounds/**'],
+          dest: 'build'
+        }]
+      }
+    },
     cssmin: {
       options: {
         report: 'min'
@@ -15,17 +25,17 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'source/styles',
           src: '**/*.css',
-          dest: 'build/css'
+          dest: 'build/styles'
         }]
       }
     },
     imagemin: {
       dynamic: {
         files: [{
-            expand: true,
-            cwd: 'source/images',
-            src: '**/*.{png,jpg,gif}',
-            dest: 'build/images'
+          expand: true,
+          cwd: 'source/images',
+          src: '**/*.{png,jpg,gif,svg}',
+          dest: 'build/images'
         }]
       }
     },
@@ -48,7 +58,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
-  grunt.registerTask('build', ['clean', 'uglify','imagemin', 'cssmin']);
+  grunt.registerTask('build', ['clean', 'copy', 'uglify','imagemin', 'cssmin']);
 };
 
