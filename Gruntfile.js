@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'source',
-          src: ['favicon.ico', 'index.html', 'sounds/**'],
+          src: ['favicon.ico', 'sounds/**'],
           dest: 'build'
         }]
       }
@@ -29,6 +29,17 @@ module.exports = function(grunt) {
         }]
       }
     },
+    htmlmin: {
+      options: {
+        collapseWhitespace: true
+      },
+      target: {
+        files:[{
+          src: 'source/index.html',
+          dest: 'build/index.html'
+        }]
+      }
+    },
     imagemin: {
       dynamic: {
         files: [{
@@ -42,10 +53,12 @@ module.exports = function(grunt) {
     uglify: {
       target: {
         files: [{
-          expand: true,
-          cwd: 'source/scripts',
-          src: '**/*.js',
-          dest: 'build/scripts'
+          //expand: true,
+          //cwd: 'source/scripts',
+          //src: '**/*.js',
+          //dest: 'build/scripts'
+          src: 'source/scripts/**/*.js',
+          dest: 'build/scripts/index.js'
         }]
       }
     }
@@ -59,7 +72,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-copy');
-
-  grunt.registerTask('build', ['clean', 'copy', 'uglify','imagemin', 'cssmin']);
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.registerTask('build', ['clean', 'copy', 'htmlmin' ,'uglify','imagemin', 'cssmin']);
 };
 
