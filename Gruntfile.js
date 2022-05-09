@@ -53,12 +53,10 @@ module.exports = function(grunt) {
     uglify: {
       target: {
         files: [{
-          //expand: true,
-          //cwd: 'source/scripts',
-          //src: '**/*.js',
-          //dest: 'build/scripts'
-          src: 'source/scripts/**/*.js',
-          dest: 'build/scripts/index.js'
+          expand: true,
+          cwd: 'source/scripts',
+          src: '**/*.js',
+          dest: 'build/scripts'
         }]
       }
     }
