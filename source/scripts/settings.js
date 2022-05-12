@@ -1,6 +1,7 @@
 import * as Stats from './stats.js';
 import * as Constants from './constants.js';
 import { toggleAccessibility, toggleKeystroke } from './accessibility.js';
+import { toggleSave } from './save.js';
 
 /* Settings Pane and Buttons */
 export const settingsPane = document.getElementById('settings-container');
@@ -8,11 +9,13 @@ export const settingsOpenButton = document.getElementById('settings-open-button'
 export const settingsCloseButton = document.getElementById('settings-close-button');
 export const settingsColorButton = document.getElementById('colors-switch');
 export const settingsKeysButton = document.getElementById('keystroke-switch');
+export const settingsSaveButton = document.getElementById('save-switch');
 
 settingsOpenButton.onclick = openSettingsPane;
 settingsCloseButton.onclick = closeSettingsPane;
 settingsColorButton.onclick = toggleAccessibility;
 settingsKeysButton.onclick = toggleKeystroke;
+settingsSaveButton.onclick = toggleSave;
 
 export let settingsPaneIsOpen = false;
 
@@ -63,6 +66,7 @@ export function toggleButtons () {
   settingsCloseButton.disabled = !settingsPaneIsOpen;
   settingsColorButton.disabled = !settingsPaneIsOpen;
   settingsKeysButton.disabled = !settingsPaneIsOpen;
+  settingsSaveButton.disabled = !settingsPaneIsOpen;
 }
 
 /* istanbul ignore next */

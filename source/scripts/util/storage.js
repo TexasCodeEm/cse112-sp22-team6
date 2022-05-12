@@ -1,4 +1,5 @@
 import * as Constants from '../constants.js';
+import { isSaveEnabled } from '../save.js';
 
 export const BEST_DAILY_POMO_ID = 'best-daily-pomo-count';
 export const TOTAL_POMO_ID = 'total-pomo-count';
@@ -12,14 +13,16 @@ export const TOTAL_CYCLE_ID = 'total-cycle-count';
 export const TOTAL_INTERRUPTION = 'total-interruption';
 export const TODAY_INTERRUPTION = 'today-interruption';
 export const ZEROS = [0, 0, 0, 0, 0, 0, 0];
-
 /**
  * Setter method for counters
  * @param {String} counterID - The key for a counter item in storage
  * @param {Number} counter - The new value for the key
  */
 export function setCounter (counterID, counter) {
-  window.localStorage.setItem(counterID, String(counter));
+  if(isSaveEnabled()){
+    window.localStorage.setItem(counterID, String(counter));
+  } 
+  sessionStorage.setItem(counterID, String(counter));
 }
 
 /**
@@ -28,7 +31,11 @@ export function setCounter (counterID, counter) {
  * @param {Date} date - The new value for the key
  */
 export function setDate (dateID, date) {
-  window.localStorage.setItem(dateID, date.toString());
+  if(isSaveEnabled()){
+    window.localStorage.setItem(dateID, date.toString());
+  }
+  sessionStorage.setItem(dateID, date.toString());
+  
 }
 
 /**
@@ -36,33 +43,37 @@ export function setDate (dateID, date) {
  * @param {Number[]} weekHistory - Pomos completed on each day of the week
  */
 export function setWeekHistory (weekHistory) {
-  window.localStorage.setItem(WEEK_HISTORY, JSON.stringify(weekHistory));
+  if(isSaveEnabled()){
+    window.localStorage.setItem(WEEK_HISTORY, JSON.stringify(weekHistory));
+  } 
+  sessionStorage.setItem(WEEK_HISTORY, JSON.stringify(weekHistory));
+  
 }
 
 /**
- * Getter method for counters
+ * Getter method for counters (chooses between local and session)
  * @param {String} counterID - The key for a counter item in storage
  * @returns {Number} the value for the key in storage
  */
 export function getCounter (counterID) {
-  return Number(window.localStorage.getItem(counterID));
+  return isSaveEnabled() ? Number(window.localStorage.getItem(counterID)) : Number(sessionStorage.getItem(counterID));
 }
 
 /**
- * Getter method for dates
+ * Getter method for dates (chooses between local and session)
  * @param {String} dateID - The key for a date item in storage
  * @returns {Date} the value for the key in storage
  */
 export function getDate (dateID) {
-  return new Date(window.localStorage.getItem(dateID) || new Date(0));
+  return isSaveEnabled() ? (new Date(window.localStorage.getItem(dateID) || new Date(0))) : (new Date(sessionStorage.getItem(dateID) || new Date(0)));
 }
 
 /**
- * Getter method for the week history
+ * Getter method for the week history (chooses between local and session)
  * @returns {Number[]} Pomos completed on each day of the week
  */
 export function getWeekHistory () {
-  return JSON.parse(window.localStorage.getItem(WEEK_HISTORY)) || ZEROS;
+  return isSaveEnabled() ? (JSON.parse(window.localStorage.getItem(WEEK_HISTORY)) || ZEROS) : (JSON.parse(sessionStorage.getItem(WEEK_HISTORY)) || ZEROS);
 }
 
 /**
