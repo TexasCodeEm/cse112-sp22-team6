@@ -10,16 +10,19 @@ export const statsPane = document.getElementById('stats-container');
 export const statsOpenButton = document.getElementById('stats-open-button');
 export const statsCloseButton = document.getElementById('stats-close-button');
 
-const totalPomoElem = document.getElementById('total-pomodoros');
-const totalInterruptElem = document.getElementById('total-interruptions');
-const bestPomoElem = document.getElementById('total-best-pomo');
-const bestTimeElem = document.getElementById('total-best-time');
-const totalTasksElem = document.getElementById('total-tasks');
+/* User Statistics/Totals */
+const totalPomoElem = document.getElementById('total-pomodoros'); // Pomos cycles: x po.
+const totalInterruptElem = document.getElementById('total-interruptions'); // Avg. Interruptions: x per po.
+const bestPomoElem = document.getElementById('total-best-pomo'); // Best Day: x po.
+const bestTimeElem = document.getElementById('total-best-time'); // Best Day: x min.
+const totalTasksElem = document.getElementById('total-tasks'); // Total Tasks: x tasks
 
-const todayPomoElem = document.getElementById('today-pomodoros');
-const todayTasksElem = document.getElementById('today-tasks');
-const todayInterruptElem = document.getElementById('today-interruptions');
+/* User Statistics/Today */
+const todayPomoElem = document.getElementById('today-pomodoros'); // Pomos cycles: x po.
+const todayTasksElem = document.getElementById('today-tasks'); // Interruptions: x
+const todayInterruptElem = document.getElementById('today-interruptions'); // Total Tasks: x tasks
 
+/* User Statistics/Weekly Overview */
 const graphCanvas = document.getElementById('weekly-graph');
 
 const MINUTES = 60;
