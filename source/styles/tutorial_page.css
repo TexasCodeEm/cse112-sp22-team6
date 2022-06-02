@@ -65,6 +65,7 @@ body {
     height: 472.5px;
     opacity: 0;
     display: block;
+    /* transition: property name | duration | timing-function | delay  */
     transition: opacity .3s ease-out .45s;
     border-radius: 8px;
 }
@@ -86,6 +87,7 @@ body {
     line-height: 1.8;
 }
 
+/* Staggered Vertical Items ------------------------------------------------------*/
 .item-header {
     position: auto;
     top: 20px;
@@ -127,6 +129,7 @@ body {
     transform: translateY(0);
 }
 
+/* Controls ----------------------------------------------------------------------*/
 .controls {
     position: relative;
     text-align: left;
