@@ -31,6 +31,7 @@ export const START_STOP_ID = 'start-stop-button';
 export const TASK_BTN_ID = 'task';
 export const TASK_POMO_COUNTER = 'task-pomo-counter';
 export const CENTER_CONTAINER = 'center-container';
+export const BREAK_CONTAINER = 'break-container';
 export const LENGTH_OF_WEEK = 7;
 export const POMO_CYCLE_LENGTH = 4;
 export const WORK_LENGTH = 1500; // # of seconds in a work pomo (orig. 1500)
@@ -38,6 +39,8 @@ export const SHORT_BREAK = 300; // # of seconds in a short break (orig. 300)
 export const LONG_BREAK = 900; // # of seconds in a long break (orig. 900)
 
 /* Settings Pane Class Lists */
+// kind of weird that these are only used in settings.js but is defined here.
+// many js files have their own list of consts, should think of grouping them all here or come up with consistent rule to distribute them
 export const SLIDE_OPEN = 'slide-open';
 export const SLIDE_CLOSE = 'slide-close';
 export const SLIDE_ACROSS_RIGHT = 'slide-across-right';
@@ -47,6 +50,7 @@ export const SLIDE_CLOSE_SETTINGS = 'slide-close-settings';
 
 /* Text */
 export const RESET_BTN_TXT = 'Reset';
+export const END_BTN_TXT = 'End Session';
 export const BEGIN_BTN_TXT = 'Begin';
 
 export const HOST_ADDRESS = 'http://127.0.0.1:5500/';
@@ -57,7 +61,7 @@ export const HOST_ADDRESS = 'http://127.0.0.1:5500/';
  */
 export const events = {
   KEYDOWN: 'keydown',
-  CLICK: 'click'
+  CLICK: 'click' // cannot find use case might be safe to delete
 };
 
 /**
@@ -96,13 +100,13 @@ export const timerOptions = {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#beginCountdown">beginCountdown</a></li><li><a href="global.html#calculateAxes">calculateAxes</a></li><li><a href="global.html#closeSettingsPane">closeSettingsPane</a></li><li><a href="global.html#closeStatsPane">closeStatsPane</a></li><li><a href="global.html#completeTask">completeTask</a></li><li><a href="global.html#displayTime">displayTime</a></li><li><a href="global.html#displayTodayStats">displayTodayStats</a></li><li><a href="global.html#displayTotalStats">displayTotalStats</a></li><li><a href="global.html#drawAxes">drawAxes</a></li><li><a href="global.html#drawBar">drawBar</a></li><li><a href="global.html#drawBars">drawBars</a></li><li><a href="global.html#drawGraph">drawGraph</a></li><li><a href="global.html#drawLine">drawLine</a></li><li><a href="global.html#events">events</a></li><li><a href="global.html#getCounter">getCounter</a></li><li><a href="global.html#getDate">getDate</a></li><li><a href="global.html#getRecentMonday">getRecentMonday</a></li><li><a href="global.html#getWeekHistory">getWeekHistory</a></li><li><a href="global.html#hidePrompt">hidePrompt</a></li><li><a href="global.html#increaseTaskPomo">increaseTaskPomo</a></li><li><a href="global.html#incrInterruptions">incrInterruptions</a></li><li><a href="global.html#incrPomoCount">incrPomoCount</a></li><li><a href="global.html#incrTasks">incrTasks</a></li><li><a href="global.html#isA11yEnabled">isA11yEnabled</a></li><li><a href="global.html#isKeystrokeEnabled">isKeystrokeEnabled</a></li><li><a href="global.html#isSameDay">isSameDay</a></li><li><a href="global.html#isStorageDateToday">isStorageDateToday</a></li><li><a href="global.html#keyControls">keyControls</a></li><li><a href="global.html#keys">keys</a></li><li><a href="global.html#openSettingsPane">openSettingsPane</a></li><li><a href="global.html#openStatsPane">openStatsPane</a></li><li><a href="global.html#removeAll">removeAll</a></li><li><a href="global.html#resetConfirm">resetConfirm</a></li><li><a href="global.html#resetTaskPomo">resetTaskPomo</a></li><li><a href="global.html#resetTimer">resetTimer</a></li><li><a href="global.html#setCountdownInterval">setCountdownInterval</a></li><li><a href="global.html#setCounter">setCounter</a></li><li><a href="global.html#setDate">setDate</a></li><li><a href="global.html#setWeekHistory">setWeekHistory</a></li><li><a href="global.html#startResetController">startResetController</a></li><li><a href="global.html#startTimer">startTimer</a></li><li><a href="global.html#stopTimer">stopTimer</a></li><li><a href="global.html#timeFraction">timeFraction</a></li><li><a href="global.html#timerOptions">timerOptions</a></li><li><a href="global.html#timerTypeIndicator">timerTypeIndicator</a></li><li><a href="global.html#toggleAccessibility">toggleAccessibility</a></li><li><a href="global.html#toggleButtons">toggleButtons</a></li><li><a href="global.html#toggleKeystroke">toggleKeystroke</a></li><li><a href="global.html#togglePomoBreak">togglePomoBreak</a></li><li><a href="global.html#toggleTaskButtonDisabled">toggleTaskButtonDisabled</a></li><li><a href="global.html#updatePots">updatePots</a></li><li><a href="global.html#updateStats">updateStats</a></li><li><a href="global.html#updateStorage">updateStorage</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#background">background</a></li><li><a href="global.html#beginCountdown">beginCountdown</a></li><li><a href="global.html#closeSettingsPane">closeSettingsPane</a></li><li><a href="global.html#closeStatsPane">closeStatsPane</a></li><li><a href="global.html#completeTask">completeTask</a></li><li><a href="global.html#displayTime">displayTime</a></li><li><a href="global.html#displayTodayStats">displayTodayStats</a></li><li><a href="global.html#displayTotalStats">displayTotalStats</a></li><li><a href="global.html#events">events</a></li><li><a href="global.html#getCounter">getCounter</a></li><li><a href="global.html#getDate">getDate</a></li><li><a href="global.html#getRecentMonday">getRecentMonday</a></li><li><a href="global.html#getWeekHistory">getWeekHistory</a></li><li><a href="global.html#hideBreakMessage">hideBreakMessage</a></li><li><a href="global.html#hidePrompt">hidePrompt</a></li><li><a href="global.html#increaseTaskPomo">increaseTaskPomo</a></li><li><a href="global.html#incrInterruptions">incrInterruptions</a></li><li><a href="global.html#incrPomoCount">incrPomoCount</a></li><li><a href="global.html#incrTasks">incrTasks</a></li><li><a href="global.html#isA11yEnabled">isA11yEnabled</a></li><li><a href="global.html#isAutoStartEnabled">isAutoStartEnabled</a></li><li><a href="global.html#isKeystrokeEnabled">isKeystrokeEnabled</a></li><li><a href="global.html#isSameDay">isSameDay</a></li><li><a href="global.html#isStorageDateToday">isStorageDateToday</a></li><li><a href="global.html#isTabEnabled">isTabEnabled</a></li><li><a href="global.html#keyControls">keyControls</a></li><li><a href="global.html#keys">keys</a></li><li><a href="global.html#lang">lang</a></li><li><a href="global.html#openSettingsPane">openSettingsPane</a></li><li><a href="global.html#openStatsPane">openStatsPane</a></li><li><a href="global.html#pomoHeader">pomoHeader</a></li><li><a href="global.html#populateLanguage">populateLanguage</a></li><li><a href="global.html#removeAll">removeAll</a></li><li><a href="global.html#resetConfirm">resetConfirm</a></li><li><a href="global.html#resetTaskPomo">resetTaskPomo</a></li><li><a href="global.html#resetTimer">resetTimer</a></li><li><a href="global.html#setCountdownInterval">setCountdownInterval</a></li><li><a href="global.html#setCounter">setCounter</a></li><li><a href="global.html#setDate">setDate</a></li><li><a href="global.html#setLanguageEn">setLanguageEn</a></li><li><a href="global.html#settingsHeader">settingsHeader</a></li><li><a href="global.html#settingsPaneStatus">settingsPaneStatus</a></li><li><a href="global.html#setWeekHistory">setWeekHistory</a></li><li><a href="global.html#showBreakMessage">showBreakMessage</a></li><li><a href="global.html#startResetController">startResetController</a></li><li><a href="global.html#startStopButton">startStopButton</a></li><li><a href="global.html#startTimer">startTimer</a></li><li><a href="global.html#statsHeader">statsHeader</a></li><li><a href="global.html#statsPaneStatus">statsPaneStatus</a></li><li><a href="global.html#stopTimer">stopTimer</a></li><li><a href="global.html#storedLanguage">storedLanguage</a></li><li><a href="global.html#taskBtn">taskBtn</a></li><li><a href="global.html#timeFraction">timeFraction</a></li><li><a href="global.html#timerOptions">timerOptions</a></li><li><a href="global.html#timerTypeIndicator">timerTypeIndicator</a></li><li><a href="global.html#toggleAccessibility">toggleAccessibility</a></li><li><a href="global.html#toggleAutoStart">toggleAutoStart</a></li><li><a href="global.html#toggleButtons">toggleButtons</a></li><li><a href="global.html#toggleKeystroke">toggleKeystroke</a></li><li><a href="global.html#togglePomoBreak">togglePomoBreak</a></li><li><a href="global.html#toggleTab">toggleTab</a></li><li><a href="global.html#toggleTaskButtonDisabled">toggleTaskButtonDisabled</a></li><li><a href="global.html#updatePots">updatePots</a></li><li><a href="global.html#updateStats">updateStats</a></li><li><a href="global.html#updateStorage">updateStorage</a></li><li><a href="global.html#workIndicator">workIndicator</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed May 11 2022 04:35:32 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Jun 07 2022 21:09:29 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>

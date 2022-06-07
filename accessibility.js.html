@@ -27,23 +27,51 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import { keys, TASK_BTN_ID } from './constants.js';
-import { startResetController } from './timer.js';
+import { startResetController, settingsButton, statsButton } from './timer.js';
 import { openStatsPane, closeStatsPane, statsPaneIsOpen } from './stats.js';
 import { openSettingsPane, closeSettingsPane, settingsPaneIsOpen, removeAll } from './settings.js';
 
 /* Button IDs */
-const RESET_YES_ID = 'reset-yes-button';
+const RESET_YES_ID = 'reset-yes-button'; // might be good to move all these to Constants.js
 const RESET_NO_ID = 'reset-no-button';
 
 const ACCESSIBLE_CLASS = 'accessible';
 const root = document.documentElement;
 
+document.onkeydown = keyControls;
+// set default settings
 let accessibleMode = false;
 let keystrokeMode = true;
-
+let autostartMode = false;
+let tabMode = true;
 document.onkeydown = keyControls;
+// override defaults if we have previous saved settings
+if (localStorage.getItem('accessible') === 'true') {
+  toggleAccessibility();
+  document.getElementById('colors-switch').checked = true;
+} else {
+  document.getElementById('colors-switch').checked = false;
+}
+if (localStorage.getItem('keystroke') === 'false') {
+  toggleKeystroke();
+  document.getElementById('keystroke-switch').checked = false;
+} else {
+  document.getElementById('keystroke-switch').checked = true;
+}
+if (localStorage.getItem('auto') === 'true') {
+  toggleAutoStart();
+  document.getElementById('autostart-switch').checked = true;
+} else {
+  document.getElementById('autostart-switch').checked = false;
+}
+if (localStorage.getItem('tab') === 'false') {
+  toggleTab();
+  document.getElementById('tab-switch').checked = false;
+} else {
+  document.getElementById('tab-switch').checked = true;
+}
 
-/* All instanbul ignored code is tested in Cypress or uses Canvas */
+/* All istanbul ignored code is tested in Cypress or uses Canvas */
 
 /**
  * Toggles the accessibility colors and fonts
@@ -57,6 +85,7 @@ export function toggleAccessibility () {
     root.classList.remove(ACCESSIBLE_CLASS);
   }
   accessibleMode = !accessibleMode;
+  accessibleMode ? localStorage.setItem('accessible', 'true') : localStorage.setItem('accessible', 'false');
 }
 
 /**
@@ -78,15 +107,19 @@ function keyControls (e) {
       e.preventDefault();
       (settingsPaneIsOpen) ? closeSettingsPane() : ((statsPaneIsOpen) ? closeStatsPane() : (() => {})());
       break;
-    case keys.LEFT_ARROW:
-      e.preventDefault();
-      removeAll();
-      (settingsPaneIsOpen) ? closeSettingsPane() : openStatsPane();
-      break;
     case keys.RIGHT_ARROW:
-      e.preventDefault();
-      removeAll();
-      (statsPaneIsOpen) ? closeStatsPane() : openSettingsPane();
+      if (!statsButton.disabled) {
+        e.preventDefault();
+        removeAll();
+        (settingsPaneIsOpen) ? closeSettingsPane() : openStatsPane();
+      }
+      break;
+    case keys.LEFT_ARROW:
+      if (!settingsButton.disabled) {
+        e.preventDefault();
+        removeAll();
+        (statsPaneIsOpen) ? closeStatsPane() : openSettingsPane();
+      }
       break;
     case keys.SPACE:
       if (!(document.activeElement instanceof HTMLInputElement)) {
@@ -115,6 +148,7 @@ function keyControls (e) {
  */
 export function toggleKeystroke () {
   keystrokeMode = !keystrokeMode;
+  keystrokeMode ? localStorage.setItem('keystroke', 'true') : localStorage.setItem('keystroke', 'false');
   document.onkeydown = (keystrokeMode) ? keyControls : undefined;
 }
 
@@ -124,6 +158,41 @@ export function toggleKeystroke () {
  */
 export function isKeystrokeEnabled () {
   return keystrokeMode;
+}
+
+/**
+ * Toggles the autostart for the timer whenever the user toggles the setting switch
+ */
+export function toggleAutoStart () {
+  autostartMode = !autostartMode;
+  autostartMode ? localStorage.setItem('auto', 'true') : localStorage.setItem('auto', 'false');
+}
+
+/**
+ * Getter method for auto start mode
+ * @returns {Boolean} true when auto start mode is on, false if off
+ */
+export function isAutoStartEnabled () {
+  return autostartMode;
+}
+
+/**
+ * Toggles the tab timer view for the timer whenever the user toggles the setting switch
+ */
+export function toggleTab () {
+  tabMode = !tabMode;
+  tabMode ? localStorage.setItem('tab', 'true') : localStorage.setItem('tab', 'false');
+  if (!tabMode) {
+    window.document.title = 'Pomodoro by Texas Codem';
+  }
+}
+
+/**
+ * Getter method for tab mode (controls whats visible as title of tab)
+ * @returns {Boolean} true when auto start mode is on, false if off
+ */
+export function isTabEnabled () {
+  return tabMode;
 }
 </code></pre>
         </article>
@@ -135,13 +204,13 @@ export function isKeystrokeEnabled () {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#beginCountdown">beginCountdown</a></li><li><a href="global.html#calculateAxes">calculateAxes</a></li><li><a href="global.html#closeSettingsPane">closeSettingsPane</a></li><li><a href="global.html#closeStatsPane">closeStatsPane</a></li><li><a href="global.html#completeTask">completeTask</a></li><li><a href="global.html#displayTime">displayTime</a></li><li><a href="global.html#displayTodayStats">displayTodayStats</a></li><li><a href="global.html#displayTotalStats">displayTotalStats</a></li><li><a href="global.html#drawAxes">drawAxes</a></li><li><a href="global.html#drawBar">drawBar</a></li><li><a href="global.html#drawBars">drawBars</a></li><li><a href="global.html#drawGraph">drawGraph</a></li><li><a href="global.html#drawLine">drawLine</a></li><li><a href="global.html#events">events</a></li><li><a href="global.html#getCounter">getCounter</a></li><li><a href="global.html#getDate">getDate</a></li><li><a href="global.html#getRecentMonday">getRecentMonday</a></li><li><a href="global.html#getWeekHistory">getWeekHistory</a></li><li><a href="global.html#hidePrompt">hidePrompt</a></li><li><a href="global.html#increaseTaskPomo">increaseTaskPomo</a></li><li><a href="global.html#incrInterruptions">incrInterruptions</a></li><li><a href="global.html#incrPomoCount">incrPomoCount</a></li><li><a href="global.html#incrTasks">incrTasks</a></li><li><a href="global.html#isA11yEnabled">isA11yEnabled</a></li><li><a href="global.html#isKeystrokeEnabled">isKeystrokeEnabled</a></li><li><a href="global.html#isSameDay">isSameDay</a></li><li><a href="global.html#isStorageDateToday">isStorageDateToday</a></li><li><a href="global.html#keyControls">keyControls</a></li><li><a href="global.html#keys">keys</a></li><li><a href="global.html#openSettingsPane">openSettingsPane</a></li><li><a href="global.html#openStatsPane">openStatsPane</a></li><li><a href="global.html#removeAll">removeAll</a></li><li><a href="global.html#resetConfirm">resetConfirm</a></li><li><a href="global.html#resetTaskPomo">resetTaskPomo</a></li><li><a href="global.html#resetTimer">resetTimer</a></li><li><a href="global.html#setCountdownInterval">setCountdownInterval</a></li><li><a href="global.html#setCounter">setCounter</a></li><li><a href="global.html#setDate">setDate</a></li><li><a href="global.html#setWeekHistory">setWeekHistory</a></li><li><a href="global.html#startResetController">startResetController</a></li><li><a href="global.html#startTimer">startTimer</a></li><li><a href="global.html#stopTimer">stopTimer</a></li><li><a href="global.html#timeFraction">timeFraction</a></li><li><a href="global.html#timerOptions">timerOptions</a></li><li><a href="global.html#timerTypeIndicator">timerTypeIndicator</a></li><li><a href="global.html#toggleAccessibility">toggleAccessibility</a></li><li><a href="global.html#toggleButtons">toggleButtons</a></li><li><a href="global.html#toggleKeystroke">toggleKeystroke</a></li><li><a href="global.html#togglePomoBreak">togglePomoBreak</a></li><li><a href="global.html#toggleTaskButtonDisabled">toggleTaskButtonDisabled</a></li><li><a href="global.html#updatePots">updatePots</a></li><li><a href="global.html#updateStats">updateStats</a></li><li><a href="global.html#updateStorage">updateStorage</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#background">background</a></li><li><a href="global.html#beginCountdown">beginCountdown</a></li><li><a href="global.html#closeSettingsPane">closeSettingsPane</a></li><li><a href="global.html#closeStatsPane">closeStatsPane</a></li><li><a href="global.html#completeTask">completeTask</a></li><li><a href="global.html#displayTime">displayTime</a></li><li><a href="global.html#displayTodayStats">displayTodayStats</a></li><li><a href="global.html#displayTotalStats">displayTotalStats</a></li><li><a href="global.html#events">events</a></li><li><a href="global.html#getCounter">getCounter</a></li><li><a href="global.html#getDate">getDate</a></li><li><a href="global.html#getRecentMonday">getRecentMonday</a></li><li><a href="global.html#getWeekHistory">getWeekHistory</a></li><li><a href="global.html#hideBreakMessage">hideBreakMessage</a></li><li><a href="global.html#hidePrompt">hidePrompt</a></li><li><a href="global.html#increaseTaskPomo">increaseTaskPomo</a></li><li><a href="global.html#incrInterruptions">incrInterruptions</a></li><li><a href="global.html#incrPomoCount">incrPomoCount</a></li><li><a href="global.html#incrTasks">incrTasks</a></li><li><a href="global.html#isA11yEnabled">isA11yEnabled</a></li><li><a href="global.html#isAutoStartEnabled">isAutoStartEnabled</a></li><li><a href="global.html#isKeystrokeEnabled">isKeystrokeEnabled</a></li><li><a href="global.html#isSameDay">isSameDay</a></li><li><a href="global.html#isStorageDateToday">isStorageDateToday</a></li><li><a href="global.html#isTabEnabled">isTabEnabled</a></li><li><a href="global.html#keyControls">keyControls</a></li><li><a href="global.html#keys">keys</a></li><li><a href="global.html#lang">lang</a></li><li><a href="global.html#openSettingsPane">openSettingsPane</a></li><li><a href="global.html#openStatsPane">openStatsPane</a></li><li><a href="global.html#pomoHeader">pomoHeader</a></li><li><a href="global.html#populateLanguage">populateLanguage</a></li><li><a href="global.html#removeAll">removeAll</a></li><li><a href="global.html#resetConfirm">resetConfirm</a></li><li><a href="global.html#resetTaskPomo">resetTaskPomo</a></li><li><a href="global.html#resetTimer">resetTimer</a></li><li><a href="global.html#setCountdownInterval">setCountdownInterval</a></li><li><a href="global.html#setCounter">setCounter</a></li><li><a href="global.html#setDate">setDate</a></li><li><a href="global.html#setLanguageEn">setLanguageEn</a></li><li><a href="global.html#settingsHeader">settingsHeader</a></li><li><a href="global.html#settingsPaneStatus">settingsPaneStatus</a></li><li><a href="global.html#setWeekHistory">setWeekHistory</a></li><li><a href="global.html#showBreakMessage">showBreakMessage</a></li><li><a href="global.html#startResetController">startResetController</a></li><li><a href="global.html#startStopButton">startStopButton</a></li><li><a href="global.html#startTimer">startTimer</a></li><li><a href="global.html#statsHeader">statsHeader</a></li><li><a href="global.html#statsPaneStatus">statsPaneStatus</a></li><li><a href="global.html#stopTimer">stopTimer</a></li><li><a href="global.html#storedLanguage">storedLanguage</a></li><li><a href="global.html#taskBtn">taskBtn</a></li><li><a href="global.html#timeFraction">timeFraction</a></li><li><a href="global.html#timerOptions">timerOptions</a></li><li><a href="global.html#timerTypeIndicator">timerTypeIndicator</a></li><li><a href="global.html#toggleAccessibility">toggleAccessibility</a></li><li><a href="global.html#toggleAutoStart">toggleAutoStart</a></li><li><a href="global.html#toggleButtons">toggleButtons</a></li><li><a href="global.html#toggleKeystroke">toggleKeystroke</a></li><li><a href="global.html#togglePomoBreak">togglePomoBreak</a></li><li><a href="global.html#toggleTab">toggleTab</a></li><li><a href="global.html#toggleTaskButtonDisabled">toggleTaskButtonDisabled</a></li><li><a href="global.html#updatePots">updatePots</a></li><li><a href="global.html#updateStats">updateStats</a></li><li><a href="global.html#updateStorage">updateStorage</a></li><li><a href="global.html#workIndicator">workIndicator</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed May 11 2022 04:35:32 GMT+0000 (Coordinated Universal Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue Jun 07 2022 21:09:29 GMT+0000 (Coordinated Universal Time)
 </footer>
 
 <script> prettyPrint(); </script>
