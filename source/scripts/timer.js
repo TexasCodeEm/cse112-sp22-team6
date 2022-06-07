@@ -3,7 +3,8 @@ import * as Storage from './util/storage.js';
 import * as Settings from './settings.js';
 import * as Stats from './stats.js';
 import { increaseTaskPomo, toggleTaskButtonDisabled } from './tasks.js';
-import { isAutoStartEnabled } from './accessibility.js';
+import { isAutoStartEnabled, isTabEnabled } from './accessibility.js';
+import { lang } from './util/language.js';
 import { closeSettingsPane, settingsPaneIsOpen } from './settings.js';
 import { closeStatsPane, statsPaneIsOpen, updateStats } from './stats.js';
 
@@ -33,9 +34,11 @@ const shortBreakIndicator = document.getElementById('short-break-indicator');
 
 const breakMessage = document.getElementById('break-message');
 const breakContainer = document.getElementById('break-container');
-const breakMessages = ['Stand up!', 'Relax!', 'Rest!', 'Breathe', 'Take a break!']; // array we cycle through to display new break messages
 
-const timeWorker = (window.Worker && !window.Cypress) ? new Worker('./scripts/timeWorker.js') : null;
+const timeWorker =
+    window.Worker && !window.Cypress
+      ? new Worker('./scripts/timeWorker.js')
+      : null;
 
 /* Class List */
 const HOVER_TEXT = 'hover-text';
@@ -95,13 +98,16 @@ export function startResetController () {
 export function beginCountdown (duration) {
   duration--;
   displayTime(duration);
-  const timerRingColor = (onBreak) ? BREAK_TIMER_COLOR : WORK_TIMER_COLOR;
-  settingsButton.disabled = !(onBreak);
-  statsButton.disabled = !(onBreak);
-  settingsButton.style.opacity = (onBreak) ? 1 : 0.2;
-  statsButton.style.opacity = (onBreak) ? 1 : 0.2;
+  const timerRingColor = onBreak ? BREAK_TIMER_COLOR : WORK_TIMER_COLOR;
+  settingsButton.disabled = !onBreak;
+  statsButton.disabled = !onBreak;
+  settingsButton.style.opacity = onBreak ? 1 : 0.2;
+  statsButton.style.opacity = onBreak ? 1 : 0.2;
   timerRing.setAttribute('stroke', timerRingColor);
-  timerRing.setAttribute('stroke-dasharray', `${(timeFraction(duration, pomoState) * DASH_STROKE_VAL)} ${DASH_STROKE_VAL}`);
+  timerRing.setAttribute(
+    'stroke-dasharray',
+        `${timeFraction(duration, pomoState) * DASH_STROKE_VAL} ${DASH_STROKE_VAL}`
+  );
 
   if (timeWorker) {
     timeWorker.onmessage = (e) => {
@@ -109,7 +115,12 @@ export function beginCountdown (duration) {
 
       const { timeLeft } = e.data;
       displayTime(timeLeft);
-      timerRing.setAttribute('stroke-dasharray', `${(timeFraction(timeLeft, pomoState) * DASH_STROKE_VAL)} ${DASH_STROKE_VAL}`);
+      timerRing.setAttribute(
+        'stroke-dasharray',
+                `${
+          timeFraction(timeLeft, pomoState) * DASH_STROKE_VAL
+        } ${DASH_STROKE_VAL}`
+      );
       if (timeLeft < 0) {
         stopTimer();
         hidePrompt();
@@ -135,7 +146,10 @@ export function setCountdownInterval (duration) {
   legacyInterval = setInterval(() => {
     --timer;
     displayTime(timer);
-    timerRing.setAttribute('stroke-dasharray', `${(timeFraction(timer, pomoState) * DASH_STROKE_VAL)} ${DASH_STROKE_VAL}`);
+    timerRing.setAttribute(
+      'stroke-dasharray',
+            `${timeFraction(timer, pomoState) * DASH_STROKE_VAL} ${DASH_STROKE_VAL}`
+    );
     if (timer < 0) {
       clearInterval(legacyInterval);
       stopTimer();
@@ -144,10 +158,10 @@ export function setCountdownInterval (duration) {
 }
 
 /**
-   * Toggles break styling in start-stop-button
-   * @param {Boolean} onBreak - Boolean to check if the timer is on break
-   * @returns {Boolean} Negation of onBreak
-   */
+ * Toggles break styling in start-stop-button
+ * @param {Boolean} onBreak - Boolean to check if the timer is on break
+ * @returns {Boolean} Negation of onBreak
+ */
 export function togglePomoBreak (onBreak) {
   if (startStopButton) {
     startStopButton.classList.toggle(BREAK_BUTTON);
@@ -196,11 +210,11 @@ export function startTimer (localOnBreak = onBreak, localPomoCount = pomoCount) 
   if (startStopButton) {
     // displaying the appropriate text in the start stop button
     if (!isAutoStartEnabled()) {
-      startStopButton.innerHTML = Constants.RESET_BTN_TXT;
+      startStopButton.innerHTML = lang.reset;
     } else if (isAutoStartEnabled() && onBreak) {
-      startStopButton.innerHTML = Constants.END_BTN_TXT;
+      startStopButton.innerHTML = lang.end;
     } else if (isAutoStartEnabled() && !onBreak) {
-      startStopButton.innerHTML = Constants.RESET_BTN_TXT;
+      startStopButton.innerHTML = lang.reset;
     }
     if (!localOnBreak) {
       pomoState = Constants.timerOptions.POMO;
@@ -233,11 +247,11 @@ function stopTimer () {
 
   // displaying the appropriate text in the start stop button
   if (isAutoStartEnabled() && !onBreak) {
-    startStopButton.innerHTML = Constants.END_BTN_TXT;
+    startStopButton.innerHTML = lang.end;
   } else if (!isAutoStartEnabled()) {
-    startStopButton.innerHTML = Constants.BEGIN_BTN_TXT;
+    startStopButton.innerHTML = lang.begin;
   } else if (isAutoStartEnabled && onBreak) {
-    startStopButton.innerHTML = Constants.RESET_BTN_TXT;
+    startStopButton.innerHTML = lang.reset;
   }
 
   if (!onBreak) {
@@ -293,9 +307,9 @@ export function updatePots () {
 }
 
 /**
-   * Resets timer upon button click
-   * @returns {Array} An array containing the stopped timer state and begin button text
-   */
+ * Resets timer upon button click
+ * @returns {Array} An array containing the stopped timer state and begin button text
+ */
 export function resetTimer () {
   pomoState = Constants.timerOptions.STOPPED;
   toggleTaskButtonDisabled(true);
@@ -313,20 +327,23 @@ export function resetTimer () {
   }
 
   if (startStopButton) {
-    startStopButton.innerHTML = Constants.BEGIN_BTN_TXT;
+    startStopButton.innerHTML = lang.begin;
     if (timeWorker) timeWorker.postMessage({ start: false });
     if (legacyInterval) clearInterval(legacyInterval);
     if (onBreak) onBreak = togglePomoBreak(onBreak);
     countdownText.classList.remove(HOVER_TEXT);
     timerRing.setAttribute('stroke', STOP_TIMER_COLOR);
-    timerRing.setAttribute('stroke-dasharray', `${DASH_STROKE_VAL} ${DASH_STROKE_VAL}`);
+    timerRing.setAttribute(
+      'stroke-dasharray',
+            `${DASH_STROKE_VAL} ${DASH_STROKE_VAL}`
+    );
     displayTime(Constants.WORK_LENGTH);
     timerTypeIndicator(Constants.WORK_LENGTH);
   }
   if (!onBreak) {
     hideBreakMessage();
   }
-  return [pomoState, Constants.BEGIN_BTN_TXT];
+  return [pomoState, lang.begin];
 }
 
 /*
@@ -345,9 +362,9 @@ export function resetPrompt () {
 
   startStopButton.style.display = 'none';
   if (isAutoStartEnabled() && onBreak) {
-    document.getElementById('prompt-text').innerHTML = 'End this pomo session? <br> This will not count as an interruption.';
+    document.getElementById('prompt-text').innerHTML = lang.interruption2;
   } else {
-    document.getElementById('prompt-text').innerHTML = 'This will count as an interruption.<br> Are you sure?';
+    document.getElementById('prompt-text').innerHTML = lang.interruption;
   }
   document.getElementById('prompt').style.display = 'flex';
   yesButton.disabled = false;
@@ -394,10 +411,14 @@ export function displayTime (time) {
   seconds = seconds < BASE_10 ? '0' + seconds : seconds;
   countdownText.textContent = minutes + ':' + seconds;
 
-  if (onBreak) {
-    window.document.title = 'Break: ' + countdownText.textContent;
+  if (isTabEnabled()) {
+    if (onBreak) {
+      window.document.title = 'Break: ' + countdownText.textContent;
+    } else {
+      window.document.title = 'Work: ' + countdownText.textContent;
+    }
   } else {
-    window.document.title = 'Work: ' + countdownText.textContent;
+    window.document.title = 'Pomodoro by Texas Codem';
   }
 
   return countdownText.textContent;
@@ -446,9 +467,9 @@ function showBreakMessage () {
   breakContainer.style.display = 'inline-block';
 
   let i = 0;
-  breakInterval = setInterval(e => {
-    i = (i + breakMessages.length) % breakMessages.length;
-    breakMessage.innerText = breakMessages[i];
+  breakInterval = setInterval((e) => {
+    i = (i + lang.breakMessages.length) % lang.breakMessages.length;
+    breakMessage.innerText = lang.breakMessages[i];
     i++;
   }, 10000);
 }

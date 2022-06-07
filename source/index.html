@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Pomodoro by Texas Codem</title>
+    <script src="./scripts/setBackground.js"></script>
     <!--build:css-->
     <link rel="stylesheet" href="./styles/settings.css">
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/timer.css">
     <link rel="stylesheet" href="./styles/stats.css">
     <link rel="stylesheet" href="./styles/confetti.css">
-    <link rel="stylesheet" href="./styles/switchBackground.css">
     <!--endbuild-->
     <link rel="icon" type="image/png" href="./favicon.ico">
     <script defer src="./scripts/timeWorker.js"></script>
@@ -21,33 +21,29 @@
     <script src="./scripts/stats.js" type="module"></script>
     <script src="./scripts/accessibility.js" type="module"></script>
     <script src="./scripts/settings.js" type="module"></script>
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/util/language.js" type="module"></script>
     <!--endbuild-->
     <!--pwa-->
+    <!--<script src="./scripts/index.js"></script>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="images/icon192.png">
-    <meta name="theme-color" content="white">
-
-    <!-- Roboto font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Condensed:wght@300&display=swap" rel="stylesheet">
-    <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+    <meta name="theme-color" content="white">-->
 </head>
 <body>
     <div id="animation-overlay">
         <img id="confetti-img" src="./images/confetti.gif" alt="Confetti gif" draggable="false">
     </div>
     <div id="pomobear-header-container">
-        <h1 id="pomobear-header">Pomobear</h1>
         <button id="info-open-button" class="info-button" type="button" aria-label="Open Info" onclick="location.href='tutorial_page.html'">
-        <img
-            width="25px"
-            height="25px"
-            src="./images/info.svg"
-            alt="Info icon"
-            draggable="false"
-        >
+            <img
+                width="25px"
+                height="25px"
+                src="./images/info.svg"
+                alt="Info icon"
+                draggable="false"
+            >
         </button>
+        <h1 id="pomobear-header">Pomobear</h1>
     </div>
     <img id="pomo-logo" src="./images/logo.svg" alt="Pomobear Logo" width="50">
 
@@ -152,14 +148,58 @@
                 >
             </button>
         <section id="settings-pane">
-            <h1>Settings</h1>
-            <div id="accessibility-overview" class="stats-box">
+            <h1 id="settings-header">Settings</h1>
+            <div id="personalization-overview" class="stats-box">
                 <header>
-                    <h2>Accessibility Options</h2>
+                    <h2 id="personalization-header">Personalization Options</h2>
                 </header>
                 <ul class="stats-flex">
                     <li class="settings-row">
-                        <p>Colorblindness</p>
+                        <p id="settings-auto">Auto-Start Timer</p>
+                        <div>
+                            <label class="switch">
+                                    <input
+                                        id="autostart-switch"
+                                        type="checkbox"
+                                    >
+                                    <span class="slider round"></span>
+                                </label>
+                        </div>
+                    </li>
+                    <li class="settings-row">
+                        <p id="settings-tab">Tab Timer Visibility</p>
+                        <div>
+                            <label class="switch">
+                                    <input
+                                        id="tab-switch"
+                                        type="checkbox"
+                                        checked
+                                        disabled
+                                    >
+                                    <span class="slider round" ></span>
+                                </label>
+                        </div>
+                    </li>
+                    <li class="settings-row">
+                        <p id="settings-backgrounds">Backgrounds</p>
+                        <div>
+                            <label for="backgroud"></label>
+                            <select name="background" class="site-navigation" id="backgrounds">
+                                <option value="original" id="background_1">Original</option>
+                                <option value="desert" id="background_2">Desert</option>
+                                <option value="lake" id="background_3">Lake</option>
+                            </select>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="accessibility-overview" class="stats-box">
+                <header>
+                    <h2 id="accessibility-header">Accessibility Options</h2>
+                </header>
+                <ul class="stats-flex">
+                    <li class="settings-row">
+                        <p id="settings-color">Colorblindness</p>
                         <div>
                             <label class="switch">
                                     <input id="colors-switch" type="checkbox" disabled>
@@ -168,7 +208,7 @@
                         </div>
                     </li>
                     <li class="settings-row">
-                        <p>Keystroke Access</p>
+                        <p id="settings-keystroke">Keystroke Access</p>
                         <div>
                             <label class="switch">
                                     <input
@@ -182,30 +222,15 @@
                         </div>
                     </li>
                     <li class="settings-row">
-                        <p>Auto-Start Timer</p>
+                        <p id="settings-languages">Languages</p>
                         <div>
-                            <label class="switch">
-                                    <input
-                                        id="autostart-switch"
-                                        type="checkbox"
-
-                                    >
-                                    <span class="slider round"></span>
-                                </label>
+                            <label for="language"></label>
+                            <select name="language" class="site-navigation" id="languages">
+                                <option value="enUS" id="english">English</option>
+                                <option value="ko" id="korean">Korean</option>
+                                <option value="es" id="spanish">Spanish</option>
+                            </select>
                         </div>
-                    </li>
-                    <li>
-                        <nav class="site-navigation">
-                            <ul>
-                                <li id="backgroundDropDown"><a href="#">Change Background</a>
-                                    <ul id="backgrounds">
-                                        <li id="background_1"><a href="#">Original</a></li>
-                                        <li id="background_2"><a href="#">Desert</a></li>
-                                        <li id="background_3"><a href="#">Lake</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </nav>
                     </li>
                 </ul>
             </div>
@@ -223,27 +248,27 @@
                 >
             </button>
         <section id="stats-pane">
-            <h1>User Statistics</h1>
+            <h1 id="stats-header">User Statistics</h1>
             <div id="stats-today" class="stats-box">
                 <header>
-                    <h2>Today</h2>
+                    <h2 id="stat-today-header">Today</h2>
                 </header>
                 <ul class="stats-flex">
                     <li class="stats-row">
-                        <p>Pomos cycles:</p>
-                        <p>
+                        <p id="stat-pomo-cycle">Pomos cycles:</p>
+                        <p id="stat-pomo-cycle-units">
                             <span id="today-pomodoros">____</span> po.
                         </p>
                     </li>
                     <li class="stats-row">
-                        <p>Interruptions:</p>
+                        <p id="stat-interruption">Interruptions:</p>
                         <p>
                             <span id="today-interruptions">____</span>
                         </p>
                     </li>
                     <li class="stats-row">
-                        <p>Total Tasks:</p>
-                        <p>
+                        <p id="stat-total-tasks">Total Tasks:</p>
+                        <p id="stat-total-tasks-units">
                             <span id="today-tasks">____</span> tasks
                         </p>
                     </li>
@@ -251,31 +276,31 @@
             </div>
             <div id="stats-totals" class="stats-box">
                 <header>
-                    <h2>Totals</h2>
+                    <h2 id="stat-total-header">Totals</h2>
                 </header>
                 <ul class="stats-flex">
                     <li class="stats-row">
-                        <p>Pomos cycles:</p>
-                        <p>
+                        <p id="stat-total-pomo-cycle">Pomos cycles:</p>
+                        <p id="stat-total-pomo-cycle-units">
                             <span id="total-pomodoros">____</span> po.
                         </p>
                     </li>
                     <li class="stats-row">
-                        <p>Avg. Interruptions:</p>
-                        <p>
+                        <p id="stat-avg-interruptions">Avg. Interruptions:</p>
+                        <p id="total-interruptions-unit">
                             <span id="total-interruptions">____</span> per po.
                         </p>
                     </li>
                     <li class="stats-row">
-                        <p>Best Day:</p>
-                        <p>
+                        <p id="stat-best-day">Best Day:</p>
+                        <p id="stat-best-day-units">
                             <span id="total-best-pomo">____</span> po. |
                             <span id="total-best-time">____</span> min.
                         </p>
                     </li>
                     <li class="stats-row">
-                        <p>Total Tasks:</p>
-                        <p>
+                        <p id="stat-total-tasks-total">Total Tasks:</p>
+                        <p id="stat-total-tasks-total-units">
                             <span id="total-tasks">____</span> tasks
                         </p>
                     </li>
@@ -283,7 +308,7 @@
             </div>
             <div id="stats-overview" class="stats-box">
                 <header>
-                    <h2>Weekly Overview</h2>
+                    <h2 id="stat-weekly-header">Weekly Overview</h2>
                 </header>
                 <div class="stats-flex">
                     <div id="graph" class="weekly-graph"></div>

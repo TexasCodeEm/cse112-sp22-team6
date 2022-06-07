@@ -1,3 +1,5 @@
+import { lang } from './language_tutorial.js';
+// Master DOManipulator v2 ------------------------------------------------------------
 const items = document.querySelectorAll('.item');
 const controls = document.querySelectorAll('.control');
 const headerItems = document.querySelectorAll('.item-header');
@@ -17,9 +19,9 @@ const slider = {
   },
   changeText: () => {
     if (current === items.length - 1) {
-      document.getElementById('go-back-button').innerHTML = 'Time to focus!';
+      document.getElementById('go-back-button').innerHTML = lang.tutorialFocusMsg;
     } else {
-      document.getElementById('go-back-button').innerHTML = 'Back to homepage';
+      document.getElementById('go-back-button').innerHTML = lang.tutorialBackBtn;
     }
   },
   nextSlide: () => { // Increment current slide and add active class
