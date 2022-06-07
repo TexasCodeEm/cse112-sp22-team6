@@ -97,10 +97,10 @@ export function removeAll () {
 /**
  * Changes the Language and background
  */
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
   languages.addEventListener('change', changeLanguage);
   background.addEventListener('change', changeBackground);
-})
+});
 /* istanbul ignore next */
 /**
  * Shows if Settings pane is open or not
