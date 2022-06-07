@@ -4,7 +4,10 @@
 self.addEventListener('install', e => {
     e.waitUntil(
         caches.open('static').then(cache => {
-            return cache.addAll(['./', './scripts/bundled.js', './scripts/timeWorker.js', './scripts/setBackground.js', './styles/main.css']);
+            return cache.addAll(['./', './scripts/bundled.js',
+                './scripts/timeWorker.js', './scripts/setBackground.js',
+                './styles/main.css'
+            ]);
         })
     );
 });
