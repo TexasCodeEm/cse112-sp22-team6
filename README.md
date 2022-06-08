@@ -7,7 +7,7 @@ stay productive. Unlike many other timers, our timer provides features like:
 - Weekly Productivity Graph
 - Keyboard Shortcuts & Accessibility
 
-To see the live project, visit [https://www.pomobears.tech/](https://www.pomobears.tech/).
+To see the live project, visit [https://texascodempomo.xyz/](https://texascodempomo.xyz/).
 
 ## Keyboard Shortcuts 
 **Keyboard Shortcuts are initially turned on for user accessibility** 
@@ -20,12 +20,12 @@ To see the live project, visit [https://www.pomobears.tech/](https://www.pomobea
 
 ## Source Documentation (JSDocs)
 
-[https://4r53n.github.io/cse110-w21-group34/](https://4r53n.github.io/cse110-w21-group34/)
+[https://texascodeem.github.io/cse112-sp22-team6/](https://texascodeem.github.io/cse112-sp22-team6/)
 
 JSDocs for main are automatically generated and hosted to GitHub Pages to
-the link above or [here](https://4r53n.github.io/cse110-w21-group34/).
+the link above or [here](https://texascodeem.github.io/cse112-sp22-team6/).
 
-## Running
+## Running in development environment
 The application uses *ES modules* which require CORS. Therefore, the server
 needs to be hosted to add all script functionality.
 
@@ -37,6 +37,23 @@ $ npm run host
 You can also use any other server hosting utility. If you use [VSCode](https://code.visualstudio.com/),
 you can use the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 extension to open `source/index.html`.
+
+## Building locally
+First, create bundled.js using our supplied script:
+```
+$ npm run bundle
+```
+Second, run the gulp build pipeline which copies, minifies, bundles source code and static resources into the build directory
+```
+$ npm run build
+```
+
+## Running production build locally
+Use the supplied script command to serve the production build from the build directory:
+```
+$ npm run host-production
+```
+**Note**: we must run a local build before running this script. 
 
 ## Testing
 Currently, there are tests for both unit testing in [Jest](https://jestjs.io/)
@@ -56,3 +73,21 @@ $ npm run cypress
 
 **Note**: If you do not want to use the host script, the app must be hosted on
 `127.0.0.1:5500`.
+
+## Linting & Validation
+To check javascript linting using eslint, run:
+```
+$ npm run lint
+```
+To perform automatic linting fix, run:
+```
+$ npm run lint-fix
+```
+To validate html, run:
+```
+$ npm run validate-html
+```
+To validate css, run:
+```
+$ npm run validate-css
+```
