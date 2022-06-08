@@ -10,7 +10,7 @@
     justify-content: space-evenly;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 768px) {
     .center-container {
         width: 80%;
         min-width: 120px;
@@ -19,18 +19,18 @@
 
 /* Animations for settings button */
 .center-container.slide-open {
-    animation: slide-center-out 0.5s ease-out forwards;
+    animation: slide-center-out-settings 0.5s ease-out forwards;
 }
 
 .center-container.slide-close {
-    animation: slide-center-in 0.5s ease-out forwards;
+    animation: slide-center-in-settings 0.5s ease-out forwards;
 }
 .break-message.slide-open {
-    animation: slide-center-out 0.5s ease-out forwards;
+    animation: slide-center-out-settings 0.5s ease-out forwards;
 }
 
 .break-message.slide-close {
-    animation: slide-center-in 0.5s ease-out forwards;
+    animation: slide-center-in-settings 0.5s ease-out forwards;
 }
 
 /* Box containing the countdown, pomojars, and begin button */
@@ -206,36 +206,6 @@
     background:rgba(255, 255, 255, 0.2);
 }
 
-/* positioning for pomo pots */
-.pots-container {
-    position: fixed;
-    top: 55px;
-    right: 105px;
-    display: flex;
-    align-items: flex-end;
-    justify-items: flex-end;
-    justify-content: flex-end;
-}
-
-.pots-container img {
-    margin-left: 4px;
-    height: 30px;
-    width: 30px;
-}
-
-.pomo-indicator-container {
-    font-size: 18px;
-    color: var(--counter-color);
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    bottom: 13%;
-    width: 90%;
-    align-self: center;
-    margin-bottom: 5px;
-}
-
 @media (max-width: 1300px){
     .pomo-indicator-container {
         font-size: 0.99rem;
@@ -252,18 +222,34 @@
     opacity: 1;
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 700px) {
     body {
         display: flex;
         flex-direction: column;
     }
 
-    .pots-container {
-        position: relative;
-        top: 100px;
+    #pomobear-header {
+        display: none;
     }
 
     .center-container {
-        padding-top: 110px;
+        padding-top: 130px;
+        height: 65%;
+    }
+
+    #break-message {
+        font-size: 1.5em;
+    }
+
+    #break-container {
+        margin-top: 40px;
+        margin-bottom: -135px;
+    }
+}
+
+@media only screen and (min-width: 450px) and (max-width: 700px){
+    #break-container {
+        margin-top: 10px;
+        margin-bottom: -95px;
     }
 }

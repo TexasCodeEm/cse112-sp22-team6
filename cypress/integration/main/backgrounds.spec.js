@@ -1,50 +1,54 @@
-const background_1_path = "url(\"http://127.0.0.1:5500/images/background.svg\")"
-const background_2_path = "url(\"http://127.0.0.1:5500/images/background2.png\")"
-const background_3_path = "url(\"http://127.0.0.1:5500/images/background3.png\")"
+const background_1_path = 'url("http://127.0.0.1:5500/images/background.svg")';
+const background_2_path = 'url("http://127.0.0.1:5500/images/background2.svg")';
+const background_3_path = 'url("http://127.0.0.1:5500/images/background3.svg")';
 
-describe('Changing Backgrounds Tests', () => {
-    beforeEach(() => {
-      cy.visit('http://127.0.0.1:5500/');
-      cy.get('#stats-open-button').click();
-    });
+describe("Changing Backgrounds and Language Tests", () => {
+  beforeEach(() => {
+    cy.visit("http://127.0.0.1:5500/");
+    cy.get("#settings-open-button").click();
+  });
+  //background
+  it("Clicking first background", () => {
+    // Default background on load 
+    expect(
+      cy.get("html").should("have.css", "background-image", background_1_path)
+    );
 
-it('Clicking first background', () => {
-    cy.get('#background_1').click({ force: true });
-    expect(cy.get('html').should('have.css', 'background-image', background_1_path));
+    cy.get('select').eq(0).select('original');
+    expect(
+      cy.get("html").should("have.css", "background-image", background_1_path)
+    );
 
-    cy.get('#background_1').should('not.be.visible')
-    cy.get('#background_2').should('not.be.visible')
-    cy.get('#background_3').should('not.be.visible')
-});
+  });
 
-it('Clicking second background', () => {
-    cy.get('#background_2').click({ force: true });
-    expect(cy.get('html').should('have.css', 'background-image', background_2_path));
+  it("Clicking second background", () => {
 
-    cy.get('#background_1').should('not.be.visible')
-    cy.get('#background_2').should('not.be.visible')
-    cy.get('#background_3').should('not.be.visible')
-});
+    cy.get('select').eq(0).select('desert');
+    expect(
+      cy.get("html").should("have.css", "background-image", background_2_path)
+    );
+  });
 
-it('Clicking third background', () => {
-    cy.get('#background_3').click({ force: true });
-    expect(cy.get('html').should('have.css', 'background-image', background_3_path));
+  it("Clicking third background", () => {
+    cy.get('select').eq(0).select('lake');
+    expect(
+      cy.get("html").should("have.css", "background-image", background_3_path)
+    );
+  });
 
-    cy.get('#background_1').should('not.be.visible')
-    cy.get('#background_2').should('not.be.visible')
-    cy.get('#background_3').should('not.be.visible')
-});
+  it("Changing backgrounds multiple times ", () => {
+    cy.get('select').eq(0).select('original');
+    expect(
+      cy.get("html").should("have.css", "background-image", background_1_path)
+    );
+    cy.get('select').eq(0).select('desert');
+    expect(
+      cy.get("html").should("have.css", "background-image", background_2_path)
+    );
+    cy.get('select').eq(0).select('lake');
+    expect(
+      cy.get("html").should("have.css", "background-image", background_3_path)
+    );
 
-it('Changing backgrounds multiple times ', () => {
-    cy.get('#background_1').click({ force: true });
-    expect(cy.get('html').should('have.css', 'background-image', background_1_path));
-    cy.get('#background_2').click({ force: true });
-    expect(cy.get('html').should('have.css', 'background-image', background_2_path))
-    cy.get('#background_3').click({ force: true });
-    expect(cy.get('html').should('have.css', 'background-image', background_3_path));
-
-    cy.get('#background_1').should('not.be.visible')
-    cy.get('#background_2').should('not.be.visible')
-    cy.get('#background_3').should('not.be.visible')
-});
+  });
 });

@@ -8,7 +8,6 @@
 }
 
 /* Color constants and size constants */
-
 :root {
     --black: #000000;
     --black-a1: rgba(0, 0, 0, 0.7);
@@ -58,7 +57,6 @@
 
 
 /* Positioning, background, size for page */
-
 html {
     background: var(--background-source) no-repeat center center fixed; 
     -webkit-background-size: cover;
@@ -75,6 +73,7 @@ body {
     height: 100%;
     margin: 0;
     font-family: "Roboto", sans-serif;
+    visibility: hidden;
 }
 
 main {
@@ -91,19 +90,26 @@ main {
 
 #pomobear-header-container {
     position: absolute;
-    left: 5%;
-    font-size: 50px;
+    display: flex;
+    left: 30px;	
+    top: -20px;
+    font-size: 2em;
     font-weight: bolder;
     color: var(--white);
+}
+
+#pomo-logo {
+    position: absolute;
+    top: 37px;
+    left: 1%;
+    visibility: hidden;
 }
 
 img {
     user-select: none;
 }
 
-
 /* Style for buttons */
-
 button {
     border: 0;
 }
@@ -124,6 +130,10 @@ aside {
     overflow: auto;
 }
 
+#pomobear-header-container img {
+    margin: 2px 0 0 0;
+}
+
 .info-button:active {
     opacity: 100%;
 }
@@ -133,12 +143,8 @@ aside {
     height: 40px;
     background: transparent;
     border-radius: 15px;
-    border: 0;
     margin-top: 53px;
-    margin-bottom: auto;
-    position: relative;
-    top: -212px;
-    left: 464px;
+    margin-left: 3px;
 }
 
 .info-button:hover:enabled {
@@ -147,13 +153,6 @@ aside {
 
 .info-button:active {
     opacity: 100%;
-}
-
-#info-open-button {
-    align-items: center;
-    align-content: center;
-    justify-items: center;
-    justify-content: center;
 }
 
 #break-message{
@@ -165,6 +164,36 @@ aside {
     visibility: hidden;
 }
 
+/* positioning for pomo pots */	
+.pots-container {	
+    position: fixed;	
+    top: 55px;	
+    right: 105px;	
+    display: flex;	
+    align-items: flex-end;	
+    justify-items: flex-end;	
+    justify-content: flex-end;	
+}
+
+.pots-container img {	
+    margin-left: 4px;	
+    height: 30px;	
+    width: 30px;	
+}
+
+.pomo-indicator-container {	
+    font-size: 18px;	
+    color: var(--counter-color);	
+    display: flex;	
+    flex-direction: row;	
+    justify-content: space-between;	
+    align-items: center;	
+    bottom: 13%;	
+    width: 90%;	
+    align-self: center;	
+    margin-bottom: 5px;	
+}
+
 #break-container {
     margin-top: -20px;
     margin-bottom: -165px;
@@ -173,6 +202,79 @@ aside {
     animation: break-animation 1s infinite;
 }
 
+/* positioning for pomo pots */
+.pots-container {
+    position: fixed;
+    top: 55px;
+    right: 105px;
+    display: flex;
+    align-items: flex-end;
+    justify-items: flex-end;
+    justify-content: flex-end;
+}
+
+.pots-container img {
+    margin-left: 4px;
+    height: 30px;
+    width: 30px;
+}
+
+.pomo-indicator-container {
+    font-size: 18px;
+    color: var(--counter-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    bottom: 13%;
+    width: 90%;
+    align-self: center;
+    margin-bottom: 5px;
+}
+
+
+/* Changes font size for pomobear title when screen gets smaller so break message does not interfere*/
+@media only screen and (max-width: 1100px) {
+    #pomobear-header {
+        font-size: 1.4em;
+    }
+
+    #pomobear-header-container {
+        top: 0px;
+    }
+
+    .info-button {
+        position: relative;
+        top: 30px;
+        margin-top: 0px;
+    }
+}
+
+/* Changes pomobear title to the logo when the screen gets smaller */
+@media only screen and (max-width: 900px) {
+    #pomobear-header {
+        display: none;
+    }
+
+    #pomo-logo {
+        top: 20px;
+        left: 20px;
+        visibility: visible;
+    }
+
+}
+
+/* Places info button next to logo for appropriate screen sizes */
+@media only screen and (max-width: 900px) {
+    .info-button {
+        position: absolute;
+        left: -35px;
+        top: 70px;
+        margin-top: 0px;
+    }
+}
+
+/* Animation for bouncing break message */
 @keyframes break-animation {
     0%,100% {
         transform: translateY(0)
@@ -180,14 +282,6 @@ aside {
       50% {
         transform: translateY(10px)
       }
-}
-
-@media only screen and (max-width: 400px) {
-    #break-message {
-        font-size: 2em;
-        max-width: 200px;
-        text-align: center;
-    }
 }
 
 /* Animations for settings and stats */
@@ -205,19 +299,11 @@ aside {
 }
 
 @keyframes slide-center-out {
-    from {
-        transform: translate(0, 0)
-    }
-    to {
-        transform: translate(-15vw, 0)
-    }
+    from { transform: translate(-15vw, 0) }
+    to { transform: translate(0, 0) }
 }
 
 @keyframes slide-center-in {
-    from {
-        transform: translate(-15vw, 0)
-    }
-    to {
-        transform: translate(0, 0)
-    }
+    from { transform: translate(15vw, 0) }
+    to { transform: translate(0, 0) }
 }
