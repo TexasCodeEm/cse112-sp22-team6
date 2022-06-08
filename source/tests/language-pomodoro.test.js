@@ -102,7 +102,7 @@ describe('Languages', () => {
     expect(statWeeklyHeader.textContent).toBe('Weekly Overview');
   });
 
-  // Test English
+  // Test Korean
   test('Check that english is working', () => {
     localStorage.setItem('language', 'ko');
     lang.setLanguageKo();
@@ -150,9 +150,9 @@ describe('Languages', () => {
     expect(statWeeklyHeader.textContent).toBe('주간 개요');
   });
 
-  // Test English
-  test('Check that english is working', () => {
-    localStorage.setItem('language', 'ko');
+  // Test Spanish
+  test('Check that spanish is working', () => {
+    localStorage.setItem('language', 'es');
     lang.setLanguageEs();
     expect(pomoHeader.textContent).toBe('Oso pomodoro');
     expect(breakMsg.textContent).toBe('¡Tómate un descanso!');
