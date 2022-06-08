@@ -95,14 +95,12 @@ export function removeAll () {
 }
 
 /**
- * Changes the background
+ * Changes the Language and background
  */
-background.addEventListener('change', changeBackground);
-
-/**
- * Changes the Language
- */
-languages.addEventListener('change', changeLanguage);
+window.addEventListener('DOMContentLoaded', function () {
+  languages.addEventListener('change', changeLanguage);
+  background.addEventListener('change', changeBackground);
+});
 /* istanbul ignore next */
 /**
  * Shows if Settings pane is open or not

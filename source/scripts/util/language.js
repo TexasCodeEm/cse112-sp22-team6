@@ -150,7 +150,7 @@ const es = {
     '¿Finalizar esta sesión? <br> Esto no contará como una interrupción.',
   yes: 'Sí',
   no: 'No',
-  completion: 'Tarea completa: <span id = "task-pomo-counter"> 0 </span> Pomos',
+  completion: 'Tarea completa: <span id="task-pomo-counter"> 0 </span> Pomos',
 
   settingsHeader: 'Configuración',
   personalizationHeader: 'Opciones de personalización',
@@ -172,20 +172,20 @@ const es = {
   statsHeader: 'Estadísticas de usuario',
   todayHeader: 'Hoy',
   pomoCycle: 'Pomos ciclos:',
-  pomoCycleUnits: '<span id = "today-pomodoros"> ____ </span> po.',
+  pomoCycleUnits: '<span id="today-pomodoros"> ____ </span> po.',
   todayInterruption: 'Interrupciones:',
   totalTasks: 'Total de tareas:',
-  totalTasksUnits: '<span id = "today-tasks"> ____ </span> tareas',
+  totalTasksUnits: '<span id="today-tasks"> ____ </span> tareas',
   todayTasks: 'Tareas',
   totalHeader: 'Totales',
-  totalPomoCycleUnits: '<span id = "total-pomodoros"> ____ </span> po.',
+  totalPomoCycleUnits: '<span id="total-pomodoros"> ____ </span> po.',
   avgInterruptions: 'Promedio de interrupciones:',
   avgInterruptionsUnits:
     '<span id = "total-interruptions"> ____ </span> por po.',
   bestDay: 'Mejor día:',
   bestDayUnits:
-    '<span id = "total-best-pomo"> ____ </span> después. | <span id = "total-best-time"> ____ </span> min. ',
-  totalTotalTasksUnits: '<span id = "total-tasks"> ____ </span> tareas',
+    '<span id="total-best-pomo"> ____ </span> después. | <span id="total-best-time"> ____ </span> min. ',
+  totalTotalTasksUnits: '<span id="total-tasks"> ____ </span> tareas',
   weeklyHeader: 'Resumen semanal',
 
   weekDays: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'],
@@ -301,19 +301,19 @@ switch (storedLanguage) {
 /**
  * functions that control what language to swap to
  */
-function setLanguageEn () {
+export function setLanguageEn () {
   lang = enUS;
   localStorage.setItem('language', 'enUS');
   populateLanguage();
   changeLanguageAxis(lang.weekDays, lang.day, lang.pomosCompleted);
 }
-function setLanguageKo () {
+export function setLanguageKo () {
   lang = ko;
   localStorage.setItem('language', 'ko');
   populateLanguage();
   changeLanguageAxis(lang.weekDays, lang.day, lang.pomosCompleted);
 }
-function setLanguageEs () {
+export function setLanguageEs () {
   lang = es;
   localStorage.setItem('language', 'es');
   populateLanguage();
