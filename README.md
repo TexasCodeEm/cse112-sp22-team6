@@ -25,6 +25,12 @@ To see the live project, visit [https://texascodempomo.xyz/](https://texascodemp
 JSDocs for main are automatically generated and hosted to GitHub Pages to
 the link above or [here](https://texascodeem.github.io/cse112-sp22-team6/).
 
+## Installing dependencies
+Our development dependencies are managed by npm. To install, run:
+```
+$ npm install
+```
+
 ## Running in development environment
 The application uses *ES modules* which require CORS. Therefore, the server
 needs to be hosted to add all script functionality.
