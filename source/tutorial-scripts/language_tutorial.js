@@ -34,7 +34,7 @@ const enUS = {
   tutorialFocusMsg: 'Time to focus!'
 };
 
-const ko = {
+export const ko = {
   tutorialWhatIs: '뽀모도로가 무엇인가요?',
   tutorialExplanation:
     '뽀모도로 사이클은 생산성을 향상시키는 도구입니다. 각 사이클은 25분의 작업 시간과 5분의 휴식 시간을 할당합니다. 4번째 포모 후에는 15분의 휴식 시간이 연장됩니다!',
@@ -70,7 +70,7 @@ const ko = {
   tutorialFocusMsg: '집중할 시간!'
 };
 
-const es = {
+export const es = {
   tutorialWhatIs: '¿Qué es un Pomodoro?',
   tutorialExplanation:
     'El Ciclo Pomodoro es una herramienta para fomentar la productividad. Cada ciclo asigna 25 minutos de tiempo para trabajar, seguidos de un período de descanso de 5 minutos. ¡Después de su cuarto pomo, obtendrá un descanso prolongado de 15 minutos!',
