@@ -40,8 +40,8 @@ const enUS = {
   background2: 'Desert',
   background3: 'Lake',
   dropdownEn: 'English',
-  dropdownKo: 'Korean',
-  dropdownEs: 'Spanish',
+  dropdownKo: '한국어',
+  dropdownEs: 'Español',
 
   statsHeader: 'User Statistics',
   todayHeader: 'Today',
@@ -99,9 +99,9 @@ const ko = {
   background1: '기본',
   background2: '사막',
   background3: '호수',
-  dropdownEn: '영어',
+  dropdownEn: 'English',
   dropdownKo: '한국어',
-  dropdownEs: '스페인어',
+  dropdownEs: 'Español',
 
   statsHeader: '사용자 통계',
   todayHeader: '오늘',
@@ -165,8 +165,8 @@ const es = {
   background1: 'Original',
   background2: 'Desierto',
   background3: 'Lago',
-  dropdownEn: 'Inglés',
-  dropdownKo: 'Coreano',
+  dropdownEn: 'English',
+  dropdownKo: '한국어',
   dropdownEs: 'Español',
 
   statsHeader: 'Estadísticas de usuario',

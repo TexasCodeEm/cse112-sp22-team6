@@ -27,6 +27,7 @@ const noButton = document.getElementById('reset-no-button');
 const timerAudio = document.getElementById('timer-sound');
 export const settingsButton = document.getElementById('settings-open-button');
 export const statsButton = document.getElementById('stats-open-button');
+const tutorialButton = document.getElementById('tutorial-open-button');
 
 const workIndicator = document.getElementById('work-indicator');
 const longBreakIndicator = document.getElementById('long-break-indicator');
@@ -101,8 +102,10 @@ export function beginCountdown (duration) {
   const timerRingColor = onBreak ? BREAK_TIMER_COLOR : WORK_TIMER_COLOR;
   settingsButton.disabled = !onBreak;
   statsButton.disabled = !onBreak;
+  tutorialButton.disabled = !onBreak;
   settingsButton.style.opacity = onBreak ? 1 : 0.2;
   statsButton.style.opacity = onBreak ? 1 : 0.2;
+  tutorialButton.style.opacity = onBreak ? 1 : 0.2;
   timerRing.setAttribute('stroke', timerRingColor);
   timerRing.setAttribute(
     'stroke-dasharray',
@@ -317,8 +320,10 @@ export function resetTimer () {
   // re-enables the timer
   settingsButton.disabled = false;
   statsButton.disabled = false;
+  tutorialButton.disabled = false;
   settingsButton.style.opacity = 1;
   statsButton.style.opacity = 1;
+  tutorialButton.style.opacity = 1;
 
   // only increments interruptions if not ending the session
   if (!isAutoStartEnabled() || !onBreak) {
@@ -482,3 +487,7 @@ function hideBreakMessage () {
   breakContainer.style.display = 'none';
   clearInterval(breakInterval);
 }
+
+tutorialButton.addEventListener('click', function () {
+  location.href = 'tutorial_page.html';
+});
