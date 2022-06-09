@@ -69,6 +69,7 @@ jobs:
         run: npm run cypress
 
       - name: Deploy JSDocs
+        if: ${{ github.event.pull_request.head.repo.full_name == 'org/repo' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
