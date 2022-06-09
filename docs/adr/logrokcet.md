@@ -23,4 +23,4 @@ LogRocket was successfully applied and every team member was given permission to
 * Pro: Correlate the effect bugs and slow performance have on feature adoption and NPS
 * Pro: Increase engagement with important pages or features in your web and mobile apps
 * Pro: Use heatmaps and scroll maps to make data-driven design decisions
-* Con: Will have an almost negligible effect on performance.
+* Con: Have an almost negligible impact on performance.
