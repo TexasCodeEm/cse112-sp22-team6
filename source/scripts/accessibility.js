@@ -106,7 +106,7 @@ function keyControls (e) {
       document.getElementById(RESET_NO_ID).click();
       break;
     case keys.Q:
-      document.getElementById('tutorial-open-button').click();
+      document.getElementById('info-open-button').click();
       break;
     case keys.T:
     case keys.DOWN_ARROW:

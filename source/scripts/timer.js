@@ -27,7 +27,7 @@ const noButton = document.getElementById('reset-no-button');
 const timerAudio = document.getElementById('timer-sound');
 export const settingsButton = document.getElementById('settings-open-button');
 export const statsButton = document.getElementById('stats-open-button');
-const tutorialButton = document.getElementById('tutorial-open-button');
+const tutorialButton = document.getElementById('info-open-button');
 
 const workIndicator = document.getElementById('work-indicator');
 const longBreakIndicator = document.getElementById('long-break-indicator');
