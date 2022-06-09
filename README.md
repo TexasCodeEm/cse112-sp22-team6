@@ -18,6 +18,9 @@ To see the live project, visit [https://texascodempomo.xyz/](https://texascodemp
 - Space Bar to start/reset timer
 - "Y"/"N" to answer prompts 
 
+## App Tutorial
+Please visit the link above and click on the info button to checkout our tutorial page. 
+
 ## Source Documentation (JSDocs)
 
 [https://texascodeem.github.io/cse112-sp22-team6/](https://texascodeem.github.io/cse112-sp22-team6/)

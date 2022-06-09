@@ -69,6 +69,7 @@ jobs:
         run: npm run cypress
 
       - name: Deploy JSDocs
+        if: ${{ github.event.pull_request.head.repo.full_name == 'org/repo' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -80,7 +81,7 @@ jobs:
           name: php-app
           path: ./build
   deploy-production:
-    if: (github.event_name == 'pull_request' && github.event.action == 'closed')
+    if: (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.head.repo.full_name == 'org/repo')
     runs-on: ubuntu-latest
     needs: build
     environment:
@@ -101,7 +102,7 @@ jobs:
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3B58C52C0F154D2E80ECA91BE12791F5 }}
           package: .
   deploy-staging: 
-    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == 'org/repo')
     runs-on: ubuntu-latest
     needs: build
     environment:
