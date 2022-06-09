@@ -326,6 +326,10 @@ export function resetTimer () {
   settingsButton.style.opacity = 1;
   statsButton.style.opacity = 1;
 
+  if (pomoCount === 0) {
+    tutorialButton.disabled = false;
+    tutorialButton.style.opacity = 1;
+  }
   // only increments interruptions if not ending the session
   if (!isAutoStartEnabled() || !onBreak) {
     Storage.incrInterruptions();
