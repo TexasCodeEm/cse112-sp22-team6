@@ -81,8 +81,8 @@ describe('Languages', () => {
     expect(dropdownLake.textContent).toBe('Lake');
     expect(settingsLanguage.textContent).toBe('Languages');
     expect(dropdownEnglish.textContent).toBe('English');
-    expect(dropdownKorean.textContent).toBe('Korean');
-    expect(dropdownSpanish.textContent).toBe('Spanish');
+    expect(dropdownKorean.textContent).toBe('한국어');
+    expect(dropdownSpanish.textContent).toBe('Español');
     expect(statsHeader.textContent).toBe('User Statistics');
     expect(statTodayHeader.textContent).toBe('Today');
     expect(statPomoCycle.textContent).toBe('Pomos cycles:');
@@ -128,9 +128,9 @@ describe('Languages', () => {
     expect(dropdownDesert.textContent).toBe('사막');
     expect(dropdownLake.textContent).toBe('호수');
     expect(settingsLanguage.textContent).toBe('언어');
-    expect(dropdownEnglish.textContent).toBe('영어');
+    expect(dropdownEnglish.textContent).toBe('English');
     expect(dropdownKorean.textContent).toBe('한국어');
-    expect(dropdownSpanish.textContent).toBe('스페인어');
+    expect(dropdownSpanish.textContent).toBe('Español');
     expect(statsHeader.textContent).toBe('사용자 통계');
     expect(statTodayHeader.textContent).toBe('오늘');
     expect(statPomoCycle.textContent).toBe('뽀모스 주기:');
@@ -176,8 +176,8 @@ describe('Languages', () => {
     expect(dropdownDesert.textContent).toBe('Desierto');
     expect(dropdownLake.textContent).toBe('Lago');
     expect(settingsLanguage.textContent).toBe('Idioma');
-    expect(dropdownEnglish.textContent).toBe('Inglés');
-    expect(dropdownKorean.textContent).toBe('Coreano');
+    expect(dropdownEnglish.textContent).toBe('English');
+    expect(dropdownKorean.textContent).toBe('한국어');
     expect(dropdownSpanish.textContent).toBe('Español');
     expect(statsHeader.textContent).toBe('Estadísticas de usuario');
     expect(statTodayHeader.textContent).toBe('Hoy');

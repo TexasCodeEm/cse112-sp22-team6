@@ -28,6 +28,7 @@ const keys = {
   T: 'KeyT',
   Y: 'KeyY',
   N: 'KeyN',
+  Q: 'KeyQ',
   LEFT_ARROW: 'ArrowLeft',
   RIGHT_ARROW: 'ArrowRight',
   DOWN_ARROW: 'ArrowDown'
@@ -305,6 +306,9 @@ function keyControls (e) {
       break;
     case keys.N:
       document.getElementById(RESET_NO_ID).click();
+      break;
+    case keys.Q:
+      document.getElementById('tutorial-open-button').click();
       break;
     case keys.T:
     case keys.DOWN_ARROW:
@@ -688,8 +692,8 @@ const enUS = {
   background2: 'Desert',
   background3: 'Lake',
   dropdownEn: 'English',
-  dropdownKo: 'Korean',
-  dropdownEs: 'Spanish',
+  dropdownKo: '한국어',
+  dropdownEs: 'Español',
 
   statsHeader: 'User Statistics',
   todayHeader: 'Today',
@@ -747,9 +751,9 @@ const ko = {
   background1: '기본',
   background2: '사막',
   background3: '호수',
-  dropdownEn: '영어',
+  dropdownEn: 'English',
   dropdownKo: '한국어',
-  dropdownEs: '스페인어',
+  dropdownEs: 'Español',
 
   statsHeader: '사용자 통계',
   todayHeader: '오늘',
@@ -798,7 +802,7 @@ const es = {
     '¿Finalizar esta sesión? <br> Esto no contará como una interrupción.',
   yes: 'Sí',
   no: 'No',
-  completion: 'Tarea completa: <span id = "task-pomo-counter"> 0 </span> Pomos',
+  completion: 'Tarea completa: <span id="task-pomo-counter"> 0 </span> Pomos',
 
   settingsHeader: 'Configuración',
   personalizationHeader: 'Opciones de personalización',
@@ -813,27 +817,27 @@ const es = {
   background1: 'Original',
   background2: 'Desierto',
   background3: 'Lago',
-  dropdownEn: 'Inglés',
-  dropdownKo: 'Coreano',
+  dropdownEn: 'English',
+  dropdownKo: '한국어',
   dropdownEs: 'Español',
 
   statsHeader: 'Estadísticas de usuario',
   todayHeader: 'Hoy',
   pomoCycle: 'Pomos ciclos:',
-  pomoCycleUnits: '<span id = "today-pomodoros"> ____ </span> po.',
+  pomoCycleUnits: '<span id="today-pomodoros"> ____ </span> po.',
   todayInterruption: 'Interrupciones:',
   totalTasks: 'Total de tareas:',
-  totalTasksUnits: '<span id = "today-tasks"> ____ </span> tareas',
+  totalTasksUnits: '<span id="today-tasks"> ____ </span> tareas',
   todayTasks: 'Tareas',
   totalHeader: 'Totales',
-  totalPomoCycleUnits: '<span id = "total-pomodoros"> ____ </span> po.',
+  totalPomoCycleUnits: '<span id="total-pomodoros"> ____ </span> po.',
   avgInterruptions: 'Promedio de interrupciones:',
   avgInterruptionsUnits:
     '<span id = "total-interruptions"> ____ </span> por po.',
   bestDay: 'Mejor día:',
   bestDayUnits:
-    '<span id = "total-best-pomo"> ____ </span> después. | <span id = "total-best-time"> ____ </span> min. ',
-  totalTotalTasksUnits: '<span id = "total-tasks"> ____ </span> tareas',
+    '<span id="total-best-pomo"> ____ </span> después. | <span id="total-best-time"> ____ </span> min. ',
+  totalTotalTasksUnits: '<span id="total-tasks"> ____ </span> tareas',
   weeklyHeader: 'Resumen semanal',
 
   weekDays: ['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'],
@@ -1124,14 +1128,12 @@ function removeAll () {
 }
 
 /**
- * Changes the background
+ * Changes the Language and background
  */
-background.addEventListener('change', changeBackground);
-
-/**
- * Changes the Language
- */
-languages.addEventListener('change', changeLanguage);
+window.addEventListener('DOMContentLoaded', function () {
+  languages.addEventListener('change', changeLanguage);
+  background.addEventListener('change', changeBackground);
+});
 /* istanbul ignore next */
 /**
  * Shows if Settings pane is open or not
@@ -1221,6 +1223,7 @@ const noButton = document.getElementById('reset-no-button');
 const timerAudio = document.getElementById('timer-sound');
 const settingsButton = document.getElementById('settings-open-button');
 const statsButton = document.getElementById('stats-open-button');
+const tutorialButton = document.getElementById('tutorial-open-button');
 
 const workIndicator = document.getElementById('work-indicator');
 const longBreakIndicator = document.getElementById('long-break-indicator');
@@ -1295,8 +1298,10 @@ function beginCountdown (duration) {
   const timerRingColor = onBreak ? BREAK_TIMER_COLOR : WORK_TIMER_COLOR;
   settingsButton.disabled = !onBreak;
   statsButton.disabled = !onBreak;
+  tutorialButton.disabled = !onBreak;
   settingsButton.style.opacity = onBreak ? 1 : 0.2;
   statsButton.style.opacity = onBreak ? 1 : 0.2;
+  tutorialButton.style.opacity = onBreak ? 1 : 0.2;
   timerRing.setAttribute('stroke', timerRingColor);
   timerRing.setAttribute(
     'stroke-dasharray',
@@ -1511,8 +1516,10 @@ function resetTimer () {
   // re-enables the timer
   settingsButton.disabled = false;
   statsButton.disabled = false;
+  tutorialButton.disabled = false;
   settingsButton.style.opacity = 1;
   statsButton.style.opacity = 1;
+  tutorialButton.style.opacity = 1;
 
   // only increments interruptions if not ending the session
   if (!isAutoStartEnabled() || !onBreak) {
@@ -1676,5 +1683,9 @@ function hideBreakMessage () {
   breakContainer.style.display = 'none';
   clearInterval(breakInterval);
 }
+
+tutorialButton.addEventListener('click', function () {
+  location.href = 'tutorial_page.html';
+});
 
 export { beginCountdown, displayTime, hidePrompt, resetConfirm, resetPrompt, resetTimer, setCountdownInterval, settingsButton, startResetController, startTimer, statsButton, timeFraction, timerTypeIndicator, togglePomoBreak, updatePots };

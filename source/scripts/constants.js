@@ -47,6 +47,7 @@ export const keys = {
   T: 'KeyT',
   Y: 'KeyY',
   N: 'KeyN',
+  Q: 'KeyQ',
   LEFT_ARROW: 'ArrowLeft',
   RIGHT_ARROW: 'ArrowRight',
   DOWN_ARROW: 'ArrowDown'
