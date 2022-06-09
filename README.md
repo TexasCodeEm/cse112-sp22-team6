@@ -8,8 +8,8 @@ stay productive. Unlike many other timers, our timer provides features like:
 - Keyboard Shortcuts & Accessibility
 
 To see the live project, visit [https://texascodempomo.xyz/](https://texascodempomo.xyz/).
--[Private Video](https://youtu.be/G1sxIc1OuBk)
--[Public Video](https://youtu.be/b99N0QF7LCg)
+- [Private Video](https://youtu.be/G1sxIc1OuBk)
+- [Public Video](https://youtu.be/b99N0QF7LCg)
 
 ## Keyboard Shortcuts 
 **Keyboard Shortcuts are initially turned on for user accessibility** 
