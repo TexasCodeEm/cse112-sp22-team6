@@ -289,7 +289,6 @@ function stopTimer () {
   updatePots();
   toggleTaskButtonDisabled(false);
   onBreak = togglePomoBreak(onBreak);
-  console.log(pomoCount)
   if(pomoCount == 0){
     tutorialButton.disabled = false;
     tutorialButton.style.opacity = 1;
