@@ -16,7 +16,8 @@ To see the live project, visit [https://texascodempomo.xyz/](https://texascodemp
 - Right Arrow to open settings pane if stats pane isn't open, or close stats pane otherwise 
 - "T" to complete task 
 - Space Bar to start/reset timer
-- "Y"/"N" to answer prompts 
+- "Y"/"N" to answer prompts
+- "Q" to view the tutorial page 
 
 ## App Tutorial
 Please visit the link above and click on the info button to checkout our tutorial page. 
