@@ -19,3 +19,7 @@ render blocking, which hinders performance.
 8. Although we downloaded the font, we could not figure out a way to not fetch the font from google for the svg of the clock.
 
 9. For the tutorial page, once a user returns from it. Any data regarding the current pomo session gets reset, so they will lose progress. However, the user should still keep their progress if they are on the tutorial page for the duration of the break. This is a complicated issue, so we just disable the tutorial forever once the first session starts.
+
+10. The CI/CD pipeline is somewhat brittle. Adding files in the wrong folder can break production. This isn't 
+necessary a issue if there is a dedicated CI/CD team that is aware of all the differnt files that are being
+pushed and created.
